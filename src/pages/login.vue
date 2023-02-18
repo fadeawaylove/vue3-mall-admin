@@ -47,6 +47,11 @@
 <script  setup>
 import { Failed } from '@element-plus/icons-vue';
 import { reactive, ref } from 'vue'
+import { login } from "~/api/manager";
+import { ElNotification } from 'element-plus'
+import { useRouter } from "vue-router";
+
+const router = useRouter()
 
 const form = reactive({
     username: '',
@@ -70,10 +75,33 @@ const onSubmit = () => {
             return false
         } else {
             console.log("验证通过。")
+            login(form.username, form.password).then(res => {
+                console.log(res.data.data);
+                // 提示成功
+                ElNotification({
+                    duration: 2000,
+                    message: "登录成功",
+                    type: 'success',
+                })
+                //存储token
+
+                // 跳转到后台首页
+                router.push("/")
+            }).catch(err => {
+                ElNotification({
+                    duration: 2000,
+                    message: err.response.data.msg || "",
+                    type: 'error',
+                })
+            })
         }
     })
 }
+
+
 </script>
+
+
 
 <style scoped>
 .login-container {
