@@ -47,7 +47,6 @@
 <script  setup>
 import { reactive } from 'vue'
 
-// do not use same name with ref
 const form = reactive({
     username: '',
     password: ''
