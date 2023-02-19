@@ -50,6 +50,10 @@ import { reactive, ref } from 'vue'
 import { login } from "~/api/manager";
 import { ElNotification } from 'element-plus'
 import { useRouter } from "vue-router";
+import { useCookies } from '@vueuse/integrations/useCookies'
+
+const cookies = useCookies(['locale'])
+
 
 const router = useRouter()
 
@@ -84,7 +88,7 @@ const onSubmit = () => {
                     type: 'success',
                 })
                 //存储token
-
+                cookies.set("admin-token", res.data.data.token);
                 // 跳转到后台首页
                 router.push("/")
             }).catch(err => {
