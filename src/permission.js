@@ -1,10 +1,13 @@
 import router from '~/router/index'
 import { getToken } from '~/utils/auth'
-import { toast } from '~/utils/notify'
+import { toast, showFullLoading, hideFullLoading } from '~/utils/notify'
 import store from './store'
 
 
 router.beforeEach(async (to, from, next) => {
+    // 显示loading
+    showFullLoading()
+
     const token = getToken()
     console.log(to, from, token)
 
@@ -23,3 +26,6 @@ router.beforeEach(async (to, from, next) => {
 
     next();
 })
+
+
+router.afterEach((to, from) => hideFullLoading())
