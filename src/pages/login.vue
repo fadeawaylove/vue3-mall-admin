@@ -34,7 +34,8 @@
                     </el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button round color="#626aef" type="primary" class="w-[250px]" @click="onSubmit">登 录</el-button>
+                    <el-button round color="#626aef" type="primary" class="w-[250px]" @click="onSubmit" :loading="loading">登
+                        录</el-button>
                 </el-form-item>
 
             </el-form>
@@ -47,12 +48,11 @@
 <script  setup>
 import { Failed } from '@element-plus/icons-vue';
 import { reactive, ref } from 'vue'
-import { login } from "~/api/manager";
+import { login, getinfo } from "~/api/manager";
 import { ElNotification } from 'element-plus'
 import { useRouter } from "vue-router";
 import { useCookies } from '@vueuse/integrations/useCookies'
 
-const cookies = useCookies(['locale'])
 
 
 const router = useRouter()
@@ -63,6 +63,7 @@ const form = reactive({
 })
 
 const formRef = ref(null)
+const loading = ref(false)
 const rules = {
     username: [
         { required: true, message: '用户名不能为空', trigger: 'blur' },
@@ -77,28 +78,34 @@ const onSubmit = () => {
     formRef.value.validate((valid) => {
         if (!valid) {
             return false
-        } else {
-            console.log("验证通过。")
-            login(form.username, form.password).then(res => {
-                console.log(res.data.data);
-                // 提示成功
-                ElNotification({
-                    duration: 2000,
-                    message: "登录成功",
-                    type: 'success',
-                })
-                //存储token
-                cookies.set("admin-token", res.data.data.token);
-                // 跳转到后台首页
-                router.push("/")
-            }).catch(err => {
-                ElNotification({
-                    duration: 2000,
-                    message: err.response.data.msg || "",
-                    type: 'error',
-                })
-            })
         }
+        loading.value = true
+        login(form.username, form.password).then(res => {
+            console.log(res);
+            // 提示成功
+            ElNotification({
+                duration: 2000,
+                message: "登录成功",
+                type: 'success',
+            })
+            //存储token
+            const cookies = useCookies()
+            cookies.set("admin-token", res.token);
+            // 请求用户信息
+            getinfo().then(info => {
+                console.log(info)
+            })
+            // 跳转到后台首页
+            router.push("/")
+        }).catch(err => {
+            // ElNotification({
+            //     duration: 2000,
+            //     message: err.response.data.msg || "",
+            //     type: 'error',
+            // })
+        }).finally(() => {
+            loading.value = false
+        })
     })
 }
 
