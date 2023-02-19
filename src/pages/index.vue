@@ -23,4 +23,5 @@ function handleLogout() {
         toast("退出登录成功")
     }).catch(() => { })
 }
+
 </script>
