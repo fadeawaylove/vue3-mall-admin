@@ -24,6 +24,8 @@ router.beforeEach(async (to, from, next) => {
         await store.dispatch('getinfo')
     }
 
+    let title = (to.meta.title ? to.meta.title : "") + "-呱呱呱"
+    document.title = title
     next();
 })
 

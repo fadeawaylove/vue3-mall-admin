@@ -8,20 +8,32 @@ import Login from '~/pages/login.vue'
 const routes = [
     {
         path: "/",
-        component: Index
+        component: Index,
+        meta: {
+            title: "后台首页"
+        }
     },
     {
         path: "/login",
-        component: Login
+        component: Login,
+        meta: {
+            title: "登录"
+        }
     },
     {
         path: "/about",
-        component: About
+        component: About,
+        meta: {
+            title: "关于"
+        }
     },
     {
         path: "/:pathMatch(.*)*",
         name: "NotFound",
-        component: NotFound
+        component: NotFound,
+        meta: {
+            title: "未知页面"
+        }
     }
 ];
 
