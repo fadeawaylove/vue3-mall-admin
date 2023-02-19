@@ -51,7 +51,7 @@ import { useRouter } from "vue-router";
 import { useStore } from 'vuex';
 import { login, getinfo } from "~/api/manager";
 import { toast } from '~/utils/notify'
-import { setToken } from "~/utils/auth";
+import { setToken } from "~/utils/auth"
 
 const router = useRouter()
 const store = useStore()

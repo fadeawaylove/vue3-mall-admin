@@ -16,5 +16,6 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 }
 
 import 'virtual:windi.css'
+import './permission'
 
 app.mount('#app')
