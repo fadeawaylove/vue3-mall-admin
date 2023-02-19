@@ -46,16 +46,15 @@
 
 
 <script  setup>
-import { Failed } from '@element-plus/icons-vue';
 import { reactive, ref } from 'vue'
-import { login, getinfo } from "~/api/manager";
-import { ElNotification } from 'element-plus'
 import { useRouter } from "vue-router";
-import { useCookies } from '@vueuse/integrations/useCookies'
-
-
+import { useStore } from 'vuex';
+import { login, getinfo } from "~/api/manager";
+import { toast } from '~/utils/notify'
+import { setToken } from "~/utils/auth";
 
 const router = useRouter()
+const store = useStore()
 
 const form = reactive({
     username: '',
@@ -83,26 +82,18 @@ const onSubmit = () => {
         login(form.username, form.password).then(res => {
             console.log(res);
             // 提示成功
-            ElNotification({
-                duration: 2000,
-                message: "登录成功",
-                type: 'success',
-            })
+            toast("登陆成功")
             //存储token
-            const cookies = useCookies()
-            cookies.set("admin-token", res.token);
+            setToken(res.token)
             // 请求用户信息
             getinfo().then(info => {
+                store.commit("SET_USERINFO", info)
                 console.log(info)
             })
             // 跳转到后台首页
             router.push("/")
         }).catch(err => {
-            // ElNotification({
-            //     duration: 2000,
-            //     message: err.response.data.msg || "",
-            //     type: 'error',
-            // })
+
         }).finally(() => {
             loading.value = false
         })
