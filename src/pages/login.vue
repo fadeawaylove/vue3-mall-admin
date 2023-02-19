@@ -47,10 +47,11 @@
 
 <script  setup>
 import { reactive, ref, onMounted, onBeforeUnmount } from 'vue'
-import { useRouter } from "vue-router";
+import { useStore } from 'vuex'
+import { useRouter } from "vue-router"
 import { toast } from '~/utils/notify'
-import store from '~/store';
 
+const store = useStore()
 const router = useRouter()
 
 const form = reactive({

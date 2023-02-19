@@ -1,6 +1,6 @@
 import { createStore } from 'vuex'
-import { login, getinfo } from '~/api/manager'
-import { setToken } from "~/utils/auth"
+import { login, getinfo, logout } from '~/api/manager'
+import { setToken, removeToken } from "~/utils/auth"
 
 const store = createStore({
     state() {
@@ -31,6 +31,12 @@ const store = createStore({
                     resolve(res)
                 }).catch(err => reject(err))
 
+            })
+        },
+        logout({ commit }) {
+            return new Promise((resolve, reject) => {
+                removeToken()
+                commit("SET_USERINFO", {})
             })
         }
     }
