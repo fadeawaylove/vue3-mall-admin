@@ -46,15 +46,12 @@
 
 
 <script  setup>
-import { reactive, ref } from 'vue'
+import { reactive, ref, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from "vue-router";
-import { useStore } from 'vuex';
-import { login, getinfo } from "~/api/manager";
 import { toast } from '~/utils/notify'
-import { setToken } from "~/utils/auth"
+import store from '~/store';
 
 const router = useRouter()
-const store = useStore()
 
 const form = reactive({
     username: '',
@@ -79,27 +76,28 @@ const onSubmit = () => {
             return false
         }
         loading.value = true
-        login(form.username, form.password).then(res => {
-            console.log(res);
-            // 提示成功
-            toast("登陆成功")
-            //存储token
-            setToken(res.token)
-            // 请求用户信息
-            getinfo().then(info => {
-                store.commit("SET_USERINFO", info)
-                console.log(info)
-            })
-            // 跳转到后台首页
+        store.dispatch("login", form).then(res => {
+            toast("登录成功")
             router.push("/")
-        }).catch(err => {
-
         }).finally(() => {
             loading.value = false
         })
     })
 }
 
+function onKeyUp(e) {
+    if (e.key == "Enter") {
+        onSubmit()
+    }
+}
+
+onMounted(() => {
+    document.addEventListener("keyup", onKeyUp)
+})
+
+onBeforeUnmount(() => {
+    document.removeEventListener("keyup", onKeyUp)
+})
 
 </script>
 

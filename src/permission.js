@@ -1,8 +1,10 @@
 import router from '~/router/index'
 import { getToken } from '~/utils/auth'
 import { toast } from '~/utils/notify'
+import store from './store'
 
-router.beforeEach((to, from, next) => {
+
+router.beforeEach(async (to, from, next) => {
     const token = getToken()
     console.log(to, from, token)
 
@@ -14,5 +16,10 @@ router.beforeEach((to, from, next) => {
         toast("请勿重复登录", "error")
         return next({ path: from.path ? from.path : "/" })
     }
+
+    if (token) {
+        await store.dispatch('getinfo')
+    }
+
     next();
 })
