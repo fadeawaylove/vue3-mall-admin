@@ -35,8 +35,12 @@ const store = createStore({
         },
         logout({ commit }) {
             return new Promise((resolve, reject) => {
-                removeToken()
-                commit("SET_USERINFO", {})
+                logout().then(res => {
+                    removeToken()
+                    commit("SET_USERINFO", {})
+                    resolve(res)
+                }).catch(err => reject(err))
+
             })
         }
     }
