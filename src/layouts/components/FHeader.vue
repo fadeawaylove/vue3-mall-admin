@@ -45,41 +45,43 @@
             </el-dropdown>
         </div>
 
-
-        <el-drawer v-model="drawer" title="修改密码" size="40%" :close-on-click-modal="false">
-
-            <el-form :model="form" :rules="rules" ref="formRef" label-width="80px" size="small">
-                <el-form-item prop="oldpassword" label="旧密码">
-                    <el-input v-model="form.oldpassword" placeholder="请输入旧密码">
-                    </el-input>
-                </el-form-item>
-
-                <el-form-item prop="password" label="新密码">
-                    <el-input type="password" v-model="form.password" placeholder="请输入密码" show-password>
-                    </el-input>
-                </el-form-item>
-
-                <el-form-item prop="repassword" label="确认密码">
-                    <el-input type="password" v-model="form.repassword" placeholder="请输入确认密码" show-password>
-                    </el-input>
-                </el-form-item>
-
-                <el-form-item>
-                    <el-button type="primary" @click="onSubmit" :loading="loading">提交</el-button>
-                </el-form-item>
-
-            </el-form>
-
-        </el-drawer>
-
     </div>
-</template>
+
+    <FormDrawer ref="formDrawerRef">
+        alsdjlkajdlajd
+        <div style="height: 1000px;"></div>
+    </FormDrawer>
+<!-- <el-drawer v-model="drawer" title="修改密码" size="40%" :close-on-click-modal="false">
+
+        <el-form :model="form" :rules="rules" ref="formRef" label-width="80px" size="small">
+        <el-form-item prop="oldpassword" label="旧密码">
+        <el-input v-model="form.oldpassword" placeholder="请输入旧密码">
+        </el-input>
+        </el-form-item>
+
+        <el-form-item prop="password" label="新密码">
+        <el-input type="password" v-model="form.password" placeholder="请输入密码" show-password>
+        </el-input>
+        </el-form-item>
+
+        <el-form-item prop="repassword" label="确认密码">
+        <el-input type="password" v-model="form.repassword" placeholder="请输入确认密码" show-password>
+        </el-input>
+        </el-form-item>
+
+        <el-form-item>
+        <el-button type="primary" @click="onSubmit" :loading="loading">提交</el-button>
+        </el-form-item>
+
+        </el-form>
+
+        </el-drawer> --></template>
 
 
 <script setup>
-
+import FormDrawer from '~/components/FormDrawer.vue'
 import { showModal, toast } from '~/utils/notify'
-import {updatepassword} from '~/api/manager'
+import { updatepassword } from '~/api/manager'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { useFullscreen } from '@vueuse/core'
@@ -90,6 +92,7 @@ const { isFullscreen, toggle } = useFullscreen()
 const router = useRouter()
 const store = useStore()
 const drawer = ref(false)
+const formDrawerRef = ref(null)
 
 
 const handleCommand = (c) => {
@@ -98,7 +101,8 @@ const handleCommand = (c) => {
             handleLogout()
             break;
         case "rePassword":
-            drawer.value = true
+            // drawer.value = true
+            formDrawerRef.value.open()
             break;
         default:
             break;
@@ -147,12 +151,12 @@ const onSubmit = () => {
         }
         loading.value = true
 
-        updatepassword(form).then(res=>{
+        updatepassword(form).then(res => {
             toast("修改密码成功，请重新登录")
             store.dispatch("logout")
             router.push("/login")
 
-        }).finally(()=>{
+        }).finally(() => {
             loading.value = false
         })
 
