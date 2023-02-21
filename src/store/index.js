@@ -6,12 +6,18 @@ const store = createStore({
     state() {
         return {
             // 用户信息
-            user: {}
+            user: {},
+            // 侧边栏
+            asideWidth: "250px"
         }
     },
     mutations: {
         SET_USERINFO(state, user) {
             state.user = user
+        },
+        // 展开、缩起侧边栏
+        handleAsideWidth(state){
+            state.asideWidth = state.asideWidth == "250px" ? "64px": "250px"
         }
     },
     actions: {
