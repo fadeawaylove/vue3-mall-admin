@@ -1,7 +1,7 @@
 <template>
     <div class="f-menu" :style="{ width: $store.state.asideWidth }">
-        <el-menu :collapse="isCollapse" unique-opened :collapse-transition="false" default-active="2" class=" border-0"
-            @select="handleSelect">
+        <el-menu :collapse="isCollapse" unique-opened :collapse-transition="false" :default-active="defaultActive"
+            class=" border-0" @select="handleSelect">
 
 
             <template v-for="(item, index) in asidemenus" :key="index">
@@ -46,12 +46,15 @@
 
 
 <script setup>
-import { computed } from 'vue';
-import { useRouter } from 'vue-router'
+import { computed, ref } from 'vue';
+import { useRouter, useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 const store = useStore()
 const router = useRouter()
+const route = useRoute()
 
+// 默认选中
+const defaultActive = ref(route.path)
 const isCollapse = computed(() => !(store.state.asideWidth == "250px"))
 
 const asidemenus = [
