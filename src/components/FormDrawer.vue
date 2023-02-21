@@ -6,7 +6,7 @@
                 <slot></slot>
             </div>
             <div class="actions">
-                <el-button type="primary" :loading="confirmLoading" @click="submit">{{ confirmText }}</el-button>
+                <el-button type="primary" :loading="loading" @click="submit">{{ confirmText }}</el-button>
                 <el-button type="default" @click="close">取消</el-button>
             </div>
         </div>
@@ -31,10 +31,6 @@ const props = defineProps({
     confirmText: {
         type: String,
         default: "提交"
-    },
-    confirmLoading: {
-        type: Boolean,
-        default: false
     }
 })
 
@@ -47,9 +43,15 @@ const showDrawer = ref(false)
 const open = () => showDrawer.value = true
 const close = () => showDrawer.value = false
 
+const loading = ref(false)
+const showLoading = () => loading.value = true
+const hideLoading = () => loading.value = false
+
 defineExpose({
     open,
-    close
+    close,
+    showLoading,
+    hideLoading
 })
 
 </script>

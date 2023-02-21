@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { login, getinfo, logout } from '~/api/manager'
+import { login, getinfo } from '~/api/manager'
 import { setToken, removeToken } from "~/utils/auth"
 
 const store = createStore({
@@ -34,14 +34,8 @@ const store = createStore({
             })
         },
         logout({ commit }) {
-            return new Promise((resolve, reject) => {
-                logout().then(res => {
-                    removeToken()
-                    commit("SET_USERINFO", {})
-                    resolve(res)
-                }).catch(err => reject(err))
-
-            })
+            removeToken()
+            commit("SET_USERINFO", {})
         }
     }
 })
