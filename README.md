@@ -1,30 +1,19 @@
-# Vue 3 + Vite
+# 相关技术网址：
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+[Vue.js](https://cn.vuejs.org/)
 
-## Recommended IDE Setup
+[Element Plus](https://element-plus.org/zh-CN/)
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+[Windi CSS](https://cn.windicss.org/)
 
+[Vite](https://cn.vitejs.dev/)
 
-相关技术网址：
-
-https://cn.vuejs.org/
-
-https://element-plus.org/zh-CN/
-
-https://cn.windicss.org/
-
-https://cn.vitejs.dev/
-
-https://router.vuejs.org/zh/
-
+[Vue Router](https://router.vuejs.org/zh/)
 
 [axios](https://www.axios-http.cn/)
 
-
 [vueuse](https://vueuse.org/)
 
-后台接口文档：
+# 后台接口文档：
 
 [后台接口](http://dishaxy.dishait.cn/shopadminapi)

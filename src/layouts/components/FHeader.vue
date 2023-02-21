@@ -12,7 +12,6 @@
             <Fold />
         </el-icon>
 
-
         <el-tooltip effect="dark" content="刷新" placement="bottom">
             <el-icon class="icon-btn" @click="handleRefresh">
                 <Refresh />
@@ -47,35 +46,26 @@
 
     </div>
 
-    <FormDrawer ref="formDrawerRef">
-        alsdjlkajdlajd
-        <div style="height: 1000px;"></div>
-    </FormDrawer>
-<!-- <el-drawer v-model="drawer" title="修改密码" size="40%" :close-on-click-modal="false">
-
+    <FormDrawer ref="formDrawerRef" title="修改密码" destroyOnClose @submit="onSubmit" :confirmLoading="loading">
         <el-form :model="form" :rules="rules" ref="formRef" label-width="80px" size="small">
-        <el-form-item prop="oldpassword" label="旧密码">
-        <el-input v-model="form.oldpassword" placeholder="请输入旧密码">
-        </el-input>
-        </el-form-item>
+            <el-form-item prop="oldpassword" label="旧密码">
+                <el-input v-model="form.oldpassword" placeholder="请输入旧密码">
+                </el-input>
+            </el-form-item>
 
-        <el-form-item prop="password" label="新密码">
-        <el-input type="password" v-model="form.password" placeholder="请输入密码" show-password>
-        </el-input>
-        </el-form-item>
+            <el-form-item prop="password" label="新密码">
+                <el-input type="password" v-model="form.password" placeholder="请输入密码" show-password>
+                </el-input>
+            </el-form-item>
 
-        <el-form-item prop="repassword" label="确认密码">
-        <el-input type="password" v-model="form.repassword" placeholder="请输入确认密码" show-password>
-        </el-input>
-        </el-form-item>
-
-        <el-form-item>
-        <el-button type="primary" @click="onSubmit" :loading="loading">提交</el-button>
-        </el-form-item>
+            <el-form-item prop="repassword" label="确认密码">
+                <el-input type="password" v-model="form.repassword" placeholder="请输入确认密码" show-password>
+                </el-input>
+            </el-form-item>
 
         </el-form>
-
-        </el-drawer> --></template>
+    </FormDrawer>
+</template>
 
 
 <script setup>
