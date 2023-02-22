@@ -57,10 +57,11 @@ const route = useRoute()
 const defaultActive = ref(route.path)
 const isCollapse = computed(() => !(store.state.asideWidth == "250px"))
 
-const asidemenus = [
-    { name: "后台面板", 'icon': "help", child: [{ name: "主控台", icon: "home-filled", frontpath: '/' }] },
-    { name: "商城管理", 'icon': "shopping-bag", child: [{ name: "商品管理", icon: "shopping-cart-full", frontpath: '/goods/list' }] }
-]
+// const asidemenus = [
+//     { name: "后台面板", 'icon': "help", child: [{ name: "主控台", icon: "home-filled", frontpath: '/' }] },
+//     { name: "商城管理", 'icon': "shopping-bag", child: [{ name: "商品管理", icon: "shopping-cart-full", frontpath: '/goods/list' }] }
+// ]
+const asidemenus = computed(()=>store.state.menus)
 
 
 const handleSelect = (e) => {
@@ -78,5 +79,9 @@ const handleSelect = (e) => {
     overflow-y: auto;
     overflow-x: hidden;
     @apply shadow-md fixed bg-light-50;
+}
+
+.f-menu::-webkit-scrollbar{
+    width: 0px;
 }
 </style>
