@@ -41,8 +41,7 @@
 
                     </template>
                     <span class="text-3xl font-bold text-gray-500">
-                        <!-- {{ item.value }} -->
-                        <CountTo :value="item.value"></CountTo>
+                        <CountTo :value="item.value" />
                     </span>
                     <el-divider />
                     <div class="flex justify-between text-sm text-gray-500">
@@ -53,8 +52,14 @@
             </el-col>
         </el-row>
 
-        <IndexNavs></IndexNavs>
+        <IndexNavs />
 
+        <el-row :gutter="20" class="mt-5">
+            <el-col :span="12" :offset="0">
+                <IndexChart />
+            </el-col>
+            <el-col :span="12" :offset="0"></el-col>
+        </el-row>
 
     </div>
 </template>
@@ -64,11 +69,11 @@
 import { ref } from 'vue'
 import { getStatistics1 } from '~/api/index'
 import IndexNavs from '~/components/IndexNavs.vue';
-import CountTo from '~/components/CountTo.vue';
+import CountTo from '~/components/CountTo.vue'
+import IndexChart from '~/components/IndexChart.vue';
 
 const panels = ref([])
 getStatistics1().then(res => {
-    console.log(res)
     panels.value = res.panels
 })
 

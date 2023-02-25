@@ -16,6 +16,9 @@
 
 [Animate.css](https://animate.style/)
 
+[ECharts](https://echarts.apache.org/handbook/zh/get-started/)
+
+
 # 后台接口文档：
 
 [后台接口](http://dishaxy.dishait.cn/shopadminapi)

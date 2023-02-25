@@ -22,5 +22,6 @@ function animateToValue() {
 animateToValue()
 
 watch(() => props.value, () => animateToValue())
+
 </script>
 
