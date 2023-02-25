@@ -53,6 +53,9 @@
             </el-col>
         </el-row>
 
+        <IndexNavs></IndexNavs>
+
+
     </div>
 </template>
 
@@ -60,6 +63,7 @@
 <script setup>
 import { ref } from 'vue'
 import { getStatistics1 } from '~/api/index'
+import IndexNavs from '~/components/IndexNavs.vue';
 import CountTo from '~/components/CountTo.vue';
 
 const panels = ref([])
