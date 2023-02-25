@@ -14,6 +14,8 @@
 
 [vueuse](https://vueuse.org/)
 
+[Animate.css](https://animate.style/)
+
 # 后台接口文档：
 
 [后台接口](http://dishaxy.dishait.cn/shopadminapi)
