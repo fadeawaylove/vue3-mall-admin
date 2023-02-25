@@ -7,7 +7,11 @@
             <el-aside :width="$store.state.asideWidth"><f-menu></f-menu></el-aside>
             <el-main>
                 <f-tag-list></f-tag-list>
-                <router-view></router-view>
+                <router-view v-slot="{ Component }">
+                    <keep-alive :max="10">
+                        <component :is="Component"></component>
+                    </keep-alive>
+                </router-view>
             </el-main>
 
         </el-container>
